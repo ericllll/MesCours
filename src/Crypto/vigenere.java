@@ -19,16 +19,16 @@ public class vigenere {
 
 	public void lireFichier(){
 		FileInputStream fis =null;
-		byte [] c = new byte[1];
+		byte [] c = new byte[2];
 		try {
-			fis = new FileInputStream(new File("entree.txt"));
+			fis = new FileInputStream(new File("src/Crypto/Data/entree.txt"));
 			while ((fis.read(c, 0, c.length))>=0){
-				System.out.print((char)c[0]);
-				tab.add((byte)c[0]);
+				System.out.print((char)c[0]*16+(char)c[1] + " ");
+				tab.add((byte)((byte)c[0]*16+(byte)c[1]));
 				longueurTexte++;
 			}
 			System.out.println("");
-			System.out.println("Nombre de caractères : " + longueurTexte);
+			System.out.println("Nombre de caracteres : " + longueurTexte);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -37,14 +37,14 @@ public class vigenere {
 	}
 	public void calculerDistribution(int longueurCle, int offset) {
 		if(offset>longueurCle){
-			System.out.println("Erreur de paramètres");
+			System.out.println("Erreur de parametres");
 			return;
 		}
 		//int [] distrib = new int[256];
 		int pos = offset-1;
 		int nbrElements = 0;
 		while (pos<tab.size()){
-			distrib[tab.get((pos))]++;
+			distrib[tab.get(pos)]++;
 			pos+=longueurCle;
 			nbrElements++;
 		}
@@ -53,7 +53,7 @@ public class vigenere {
 			somme+=((double)i/(double)nbrElements)*((double)i/(double)nbrElements);
 		}
 		//System.out.println(1.0/256.0);
-		System.out.println("longueur clé : " + longueurCle + ". Offset : " + offset + " -");
+		System.out.println("longueur cle : " + longueurCle + ". Offset : " + offset + " -");
 		System.out.println("la somme vaut " + somme + " et l'ecart vaut " + Math.abs(somme-(1.0/256.0)));
 	}
 	public void trouverCle(){
@@ -86,6 +86,18 @@ public class vigenere {
 			pos++;
 		}
 	}
+	public static int hex2decimal(String s) {
+		String digits = "0123456789ABCDEF";
+		s = s.toUpperCase();
+		int val = 0;
+		for (int i = 0; i<s.length(); i++) {
+			char c = s.charAt(i);
+			int d = digits.indexOf(c);
+			val = 16*val + d;
+		}
+		return val;
+	}
+	
 	
 }
 	
@@ -110,7 +122,7 @@ public class vigenere {
 				}
 				//buf = new byte[8];
 			}
-			System.out.println("Copie terminée.");
+			System.out.println("Copie terminï¿½e.");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e){
