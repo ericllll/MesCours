@@ -30,13 +30,13 @@ public class OneTimePad {
 				copie[0] = (char)c[0];
 				copie[1] = (char)c[1];
 				//System.out.println(String.copyValueOf(copie));
-				tab.add((hex2decimal(String.copyValueOf(copie))));
-				System.out.print(hex2decimal(String.copyValueOf(copie)) + " ");
+				//tab.add((hex2decimal(String.copyValueOf(copie))));
+				//System.out.print(hex2decimal(String.copyValueOf(copie)) + " ");
 				//tab.add((byte)((byte)c[0]*16+(byte)c[1]));
-				longueurTexte++;
+				//longueurTexte++;
 			}
 			System.out.println("");
-			System.out.println("Nombre de caracteres : " + longueurTexte);
+			//System.out.println("Nombre de caracteres : " + longueurTexte);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

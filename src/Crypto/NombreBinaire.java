@@ -18,23 +18,25 @@ public class NombreBinaire {
 		boolean test = false;
 		int i = 0;
 		while(i<nbr.length() && test==false){
-			if(str2.indexOf(nbr.charAt(i))==-1){
+			if(str2.indexOf((int)nbr.charAt(i))==-1){
 				test=true;
 			}
 			i++;
 		}
 		if(test==false){
+			//System.out.println("binaire");
 			nbrBinaire = bin2Decimal(nbr);
 		} else {
 			i=0;
 			test=false;
 			while(i<nbr.length() && test==false){
-				if(str1.indexOf(nbr.charAt(i))==-1){
+				if(str1.indexOf((int)nbr.charAt(i))==-1){
 					test=true;
 				}
 				i++;
 			}
-			if(test=false){
+			if(test==false){
+				//System.out.println("hexa");
 				nbrBinaire = hex2Decimal(nbr);
 			} else {
 				System.out.println("La chaine de caractère contient des caractères non valides pour un format binaire ou hexa.");
@@ -83,7 +85,19 @@ public class NombreBinaire {
 	public String getNbrStringBin(){
 		String str = new String();
 		str = Integer.toBinaryString(nbrBinaire);
-		return str;
+		if (str.length()>8){
+			return str.substring(str.length()-8);
+		} else {
+			if (str.length()==8){
+				return str;
+			} else {
+				String newStr = new String("0");
+				for (int i=0; i<(7-str.length()); i++){
+					newStr = newStr.concat("0");
+				}
+				return newStr.concat(str);
+			}
+		}
 	}
 	
 	
